@@ -9,6 +9,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 * add the `include_pending` parameter to `get_attendances()` to also retrieve pending
   attendance records (`includePending` API parameter) ([#49](https://github.com/at-gmbh/personio-py/pull/49))
 * add the `preferred_name` field to the `Employee` model ([#50](https://github.com/at-gmbh/personio-py/pull/50))
+* add the `project` field to the `Attendance` model: attendance records now expose their
+  project as a typed `Project` object (previously the field was silently dropped), and a
+  project assigned to an `Attendance` is sent as `project_id` when creating or patching it.
+  `ObjectFieldMapping` now passes the full nested dict to `from_dict()`, so a top-level `id`
+  next to the `attributes` dict is preserved. ([#51](https://github.com/at-gmbh/personio-py/pull/51))
 * migrate build & dependency management to [Poetry](https://python-poetry.org/): replace
   `setup.py` and `requirements*.txt` with a single `pyproject.toml` (PEP 621) plus committed
   `poetry.lock` and `test`/`linter`/`docs`/`dev` dependency groups; CI now builds, tests and
